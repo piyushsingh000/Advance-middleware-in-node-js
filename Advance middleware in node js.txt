@@ -1,0 +1,43 @@
+const express = require("express");
+const app = express();
+
+const middleware = require("./middleware");
+const route = express.Router();
+route.use(middleware);
+
+//baki ka export into middleware,js
+// module.exports = middleware = (request, responce, next) => {
+//   // console.log(reqFilter);
+//   if (!request.query.age) {
+//     responce.send("Enter an age");
+//   } else if (request.query.age >= 18) {
+//     responce.send("An Adult Age");
+//   } else if (request.query.age < 18) {
+//     responce.send("Enter a vailed age : ");
+//   } else {
+//     next();
+//   }
+// };
+//
+
+// app.use(middleware);
+
+app.get("/", (request, responce) => {
+  responce.send("Welcome to Home Page ");
+});
+app.get("/users", (request, responce) => {
+  responce.send("Welcome to users Page ");
+});
+app.get("/about", (request, responce) => {
+  responce.send("Welcome to About Page ");
+});
+route.get("/help", (request, responce) => {
+  responce.send("Welcome to help Page ");
+});
+route.get("/contact", (request, responce) => {
+  responce.send("Welcome to Contact Page ");
+});
+
+app.use("/", route);
+
+app.listen(3000);
